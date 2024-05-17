@@ -1,5 +1,6 @@
 import MobileNav from "@/components/shared/MobileNav";
 import Sidebar from "@/components/shared/Sidebar";
+import { Toaster } from "@/components/ui/toaster";
 import React, { ReactNode } from "react";
 
 interface RootLayoutProps {
@@ -14,6 +15,7 @@ export default function RootLayou({ children }: RootLayoutProps) {
       <div className="root-container">
         <div className="wrapper">{children}</div>
       </div>
+      <Toaster />
     </main>
   );
 }
