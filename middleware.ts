@@ -6,7 +6,7 @@ import { authMiddleware } from "@clerk/nextjs/server";
 // publicRoutes: ['/anyone-can-visit-this-route'],
 
 export default authMiddleware({
-  publicRoutes: ["/api/webhooks/clerk"],
+  publicRoutes: ["/", "/api/webhooks/clerk", "/api/webhooks/stripe"],
 });
 
 export const config = {
