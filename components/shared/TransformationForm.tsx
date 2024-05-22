@@ -28,6 +28,7 @@ import { getCldImageUrl } from "next-cloudinary";
 import { addImage, updateImage } from "@/lib/actions/image.action";
 import { useRouter } from "next/navigation";
 import { InsufficientCreditsModal } from "./InsufficientCreditsModal";
+import { useToast } from "../ui/use-toast";
 
 export const formSchema = z.object({
   title: z.string(),
@@ -45,6 +46,7 @@ export default function TransformationForm({
   creditBalance,
   config = null,
 }: TransformationFormProps) {
+  const { toast } = useToast();
   const transformationType = transformationTypes[type];
   const [image, setImage] = useState(data);
   const [newTransformation, setNewTransformation] =
@@ -94,7 +96,12 @@ export default function TransformationForm({
         prompt: values.prompt,
         color: values.color,
       };
-
+      if (!imageData.title) {
+        toast({
+          title: "Image title required",
+          variant: "destructive",
+        });
+      }
       if (action == "Add") {
         try {
           const newImage = await addImage({
